@@ -9,11 +9,7 @@ int ok = 0;
 int login()
 {
     int len = 0;
-    printf("我已注册过-请输入 0 \n");
-    printf("我是新用户-请输入 1 \n");
-    printf("请输入账号：\n");
     gets(name);
-    printf("请输入密码：\n");
     gets(pas); 
     strcat(name,pas);//合并字符
     strcat(name,"\n");//添加换行字符
@@ -58,39 +54,36 @@ void regist(){
 }
 
 void game()
-{	
-    srand((unsigned int)time(NULL));  
-    int x = rand() % 1000;  //1000以内的随机值；rand()函数可以用来产生随机数
-    int y;
-    int t1 = time(NULL);  //记录猜数时间 
-    int j = 1;  //记录猜数次数 
-    while (1)  //判断输入的数和猜的数的大小
-    {
-        scanf_s("%d", &y);
-        if (x > y)
-        {
-            j++;	
-            printf("猜小了\n");
-        }
-        else if (x < y)
-        {
-            j++;	
-            printf("猜大了\n");
-        }
-        else
-        {
-            j++;	
-            printf("恭喜你，猜对了!你一共用了%d次猜对,用时%d秒。\n",j,t2-t1);  
-            break;
-        }
- 
-    }
+{
+	//生成一个随机数
+	int ret = 0;
+	int guess = 0;
+	ret = rand()%100+1;//生成随机数  //处于一百取余得到1-99的数，然后+1得到1-100的数
+	while (1)
+	{
+		printf("请猜一个数\n");
+		scanf("%d",&guess);
+		if (guess > ret)
+		{
+			printf("你猜大了\n");
+		}
+		else if (guess < ret)
+		{
+			printf("你猜小了\n");
+		}
+		else
+		{
+		    printf("恭喜你！猜对了\n");
+			break;
+		}
+	}
 }
 
-void menu()  //目录   
+void menu()
 {
-    printf("开始游戏-请输入 1\n");
-    printf("退出游戏-请输入 0\n");
+	printf("*************************\n");
+	printf("***  1 play  0 exit   ***\n");
+	printf("*************************\n");
 }
 
 int main()
@@ -103,23 +96,18 @@ int main()
         login();
     
     menu();
-    guess:
-    printf("请输入：\n");
-    int a;
-    scanf("%d", &a);
-    switch (a)
-    {
-        case 1:
-        printf("游戏开始！\n请输入你猜的数：\n");
-        game();
-        break;
-
-        case 0:
-        break;
-        default:
-        printf("选项错误!\n请重新输入：\n");
-        goto guess;
-    }
-    
+    switch (input)
+	{ 
+		case 1:
+			game();
+			//printf("进入游戏\n");
+			break;
+		case 0:
+			printf("退出游戏\n");
+			break;
+		default:
+			printf("输入错误，请重新选择\n");
+	}
+	
     return 0;
 }
