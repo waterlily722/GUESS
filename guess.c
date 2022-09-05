@@ -89,8 +89,8 @@ void game()
 
 void menu()  //目录   
 {
-    printf("开始游戏-请输入 1\n");
-    printf("退出游戏-请输入 0\n");
+    printf("1 play\n");
+    printf("0 exit\n");
 }
 
 int main()
